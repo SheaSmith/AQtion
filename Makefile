@@ -12,9 +12,9 @@
 # Makefile for the AQtion(tm) Ethernet driver
 #
 
-ifneq ($(KERNELRELEASE),)
-include $(src)/Kbuild
-else
+# ifneq ($(KERNELRELEASE),)
+# include $(src)/Kbuild
+# else
 
 
 TARGET := atlantic
@@ -23,11 +23,11 @@ export DEBIAN=`/usr/bin/dpkg --search /usr/bin/dpkg >/dev/null 2>&1 && echo 1 ||
 
 export KO_EXISTS=`cat /etc/modules 2>/dev/null | grep atlantic && echo 1 || echo 0`
 
-ifndef KDIR
-	BUILD_DIR:=/lib/modules/$(shell uname -r)/build
-else
-	BUILD_DIR:=$(KDIR)
-endif
+# ifndef KDIR
+# 	BUILD_DIR:=/lib/modules/$(shell uname -r)/build
+# else
+# 	BUILD_DIR:=$(KDIR)
+# endif
 
 PWD:=$(shell pwd)
 
@@ -109,4 +109,4 @@ uninstall:
 	@$(MAKE) -f $(lastword $(MAKEFILE_LIST)) updateramfs
 
 
-endif
+# endif
