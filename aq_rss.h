@@ -13,6 +13,21 @@
 #include "aq_common.h"
 #include "aq_cfg.h"
 
+typedef uint64_t u64;
+typedef uint32_t u32;
+typedef uint16_t u16;
+typedef uint8_t  u8;
+typedef int64_t s64;
+typedef int32_t s32;
+typedef int16_t s16;
+typedef int8_t  s8;
+typedef uint16_t __le16;
+typedef uint32_t __le32;
+typedef uint64_t __le64;
+typedef uint16_t __be16;
+typedef uint32_t __be32;
+typedef uint64_t __be64;
+
 struct aq_rss_parameters {
 	u16 base_cpu_number;
 	u16 indirection_table_size;

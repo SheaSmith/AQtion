@@ -15,11 +15,11 @@
 #define HW_ATL_FLUSH() { (void)aq_hw_read_reg(self, 0x10); }
 
 /* Hardware tx descriptor */
-struct __packed hw_atl_txd_s {
+typedef volatile struct {
 	u64 buf_addr;
 	u32 ctl;
 	u32 ctl2; /* 63..46 - payload length, 45 - ctx enable, 44 - ctx index */
-};
+} __attribute__((__packed__)) hw_atl_txd_s;
 
 /* Hardware tx context descriptor */
 struct __packed hw_atl_txc_s {
