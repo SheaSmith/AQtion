@@ -13,7 +13,8 @@
 #include "aq_common.h"
 #include "aq_cfg.h"
 
-#include <linux/compiler.h>
+#include <sys/cdefs.h>
+#include <sys/types.h>
 
 typedef uint64_t u64;
 typedef uint32_t u32;
