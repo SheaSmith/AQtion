@@ -22,38 +22,38 @@ typedef volatile struct {
 } __attribute__((__packed__)) hw_atl_txd_s;
 
 /* Hardware tx context descriptor */
-struct __packed hw_atl_txc_s {
+typedef volatile struct  {
 	u32 rsvd;
 	u32 len;
 	u32 ctl;
 	u32 len2;
-};
+} __attribute__((__packed__)) hw_atl_txc_s;
 
 /* Hardware rx descriptor */
-struct __packed hw_atl_rxd_s {
+typedef volatile struct  {
 	u64 buf_addr;
 	u64 hdr_addr;
-};
+} __attribute__((__packed__)) hw_atl_rxd_s;
 
 /* Hardware rx descriptor writeback */
-struct __packed hw_atl_rxd_wb_s {
+typedef volatile struct  {
 	u32 type;
 	u32 rss_hash;
 	u16 status;
 	u16 pkt_len;
 	u16 next_desc_ptr;
 	__le16 vlan;
-};
+} __attribute__((__packed__)) hw_atl_rxd_wb_s;
 
 /* Hardware rx HW TIMESTAMP writeback */
-struct __packed hw_atl_rxd_hwts_wb_s {
+typedef volatile struct  {
 	u32 sec_hw;
 	u32 ns;
 	u32 sec_lw0;
 	u32 sec_lw1;
-};
+} __attribute__((__packed__)) hw_atl_rxd_hwts_wb_s;
 
-struct __packed hw_atl_stats_s {
+typedef volatile struct  {
 	u32 uprc;
 	u32 mprc;
 	u32 bprc;
@@ -69,9 +69,9 @@ struct __packed hw_atl_stats_s {
 	u32 ubrc;
 	u32 ubtc;
 	u32 dpc;
-};
+} __attribute__((__packed__)) hw_atl_stats_s;
 
-struct __packed drv_msg_enable_wakeup {
+typedef volatile struct  {
 	union {
 		u32 pattern_mask;
 
@@ -89,32 +89,32 @@ struct __packed drv_msg_enable_wakeup {
 	union {
 		u32 offload_mask;
 	};
-};
+} __attribute__((__packed__)) drv_msg_enable_wakeup;
 
-struct __packed magic_packet_pattern_s {
+typedef volatile struct  {
 	u8 mac_addr[ETH_ALEN];
-};
+} __attribute__((__packed__)) magic_packet_pattern_s;
 
-struct __packed drv_msg_wol_add {
+typedef volatile struct  {
 	u32 priority;
 	u32 packet_type;
 	u32 pattern_id;
 	u32 next_pattern_offset;
 
 	struct magic_packet_pattern_s magic_packet_pattern;
-};
+} __attribute__((__packed__)) drv_msg_wol_add;
 
-struct __packed drv_msg_wol_remove {
+typedef volatile struct  {
 	u32 id;
-};
+} __attribute__((__packed__)) drv_msg_wol_remove;
 
-struct __packed hw_atl_utils_mbox_header {
+typedef volatile struct  {
 	u32 version;
 	u32 transaction_id;
 	u32 error;
-};
+} __attribute__((__packed__)) hw_atl_utils_mbox_header;
 
-struct __packed hw_atl_ptp_offset {
+typedef volatile struct  {
 	u16 ingress_100;
 	u16 egress_100;
 	u16 ingress_1000;
@@ -125,14 +125,14 @@ struct __packed hw_atl_ptp_offset {
 	u16 egress_5000;
 	u16 ingress_10000;
 	u16 egress_10000;
-};
+} __attribute__((__packed__)) hw_atl_ptp_offset;
 
-struct __packed hw_atl_cable_diag {
+typedef volatile struct  {
 	u8 fault;
 	u8 distance;
 	u8 far_distance;
 	u8 reserved;
-};
+} __attribute__((__packed__)) hw_atl_cable_diag;
 
 enum gpio_pin_function {
 	GPIO_PIN_FUNCTION_NC,
@@ -149,7 +149,7 @@ enum gpio_pin_function {
 	GPIO_PIN_FUNCTION_SIZE
 };
 
-struct __packed hw_atl_info {
+typedef volatile struct  {
 	u8 reserved[6];
 	u16 phy_fault_code;
 	u16 phy_temperature;
@@ -173,15 +173,15 @@ struct __packed hw_atl_info {
 	enum gpio_pin_function gpio_pin[3];
 	u32 pcie_aer_dump[18];
 	u16 snr_margin[4];
-};
+} __attribute__((__packed__)) hw_atl_info;
 
-struct __packed hw_atl_utils_mbox {
+typedef volatile struct  {
 	struct hw_atl_utils_mbox_header header;
 	struct hw_atl_stats_s stats;
 	struct hw_atl_info info;
-};
+} __attribute__((__packed__)) hw_atl_utils_mbox;
 
-struct __packed offload_ip_info {
+typedef volatile struct  {
 	u8 v4_local_addr_count;
 	u8 v4_addr_count;
 	u8 v6_local_addr_count;
@@ -190,32 +190,32 @@ struct __packed offload_ip_info {
 	u32 v4_prefix;
 	u32 v6_addr;
 	u32 v6_prefix;
-};
+} __attribute__((__packed__)) offload_ip_info;
 
-struct __packed offload_port_info {
+typedef volatile struct  {
 	u16 udp_port_count;
 	u16 tcp_port_count;
 	u32 udp_port;
 	u32 tcp_port;
-};
+} __attribute__((__packed__)) offload_port_info;
 
-struct __packed offload_ka_info {
+typedef volatile struct  {
 	u16 v4_ka_count;
 	u16 v6_ka_count;
 	u32 retry_count;
 	u32 retry_interval;
 	u32 v4_ka;
 	u32 v6_ka;
-};
+} __attribute__((__packed__)) offload_ka_info;
 
-struct __packed offload_rr_info {
+typedef volatile struct  {
 	u32 rr_count;
 	u32 rr_buf_len;
 	u32 rr_id_x;
 	u32 rr_buf;
-};
+} __attribute__((__packed__)) offload_rr_info;
 
-struct __packed offload_info {
+typedef volatile struct  {
 	u32 version;
 	u32 len;
 	u8 mac_addr[ETH_ALEN];
@@ -227,13 +227,13 @@ struct __packed offload_info {
 	struct offload_ka_info kas;
 	struct offload_rr_info rrs;
 	u8 buf[0];
-};
+} __attribute__((__packed__))offload_info;
 
-struct __packed fw_dash_req {
+typedef volatile struct  {
 	u8 buffer[4096];
-};
+} __attribute__((__packed__)) fw_dash_req;
 
-struct __packed hw_atl_utils_fw_rpc {
+typedef volatile struct  {
 	u32 msg_id;
 
 	union {
@@ -246,35 +246,35 @@ struct __packed hw_atl_utils_fw_rpc {
 		/* DASH FW Request */
 		struct fw_dash_req dash_req;
 	};
-};
+} __attribute__((__packed__)) hw_atl_utils_fw_rpc;
 
 /* Mailbox FW Request interface */
-struct __packed hw_fw_request_ptp_gpio_ctrl {
+typedef volatile struct  {
 	u32 index;
 	u32 period;
 	u64 start;
-};
+} __attribute__((__packed__)) hw_fw_request_ptp_gpio_ctrl;
 
-struct __packed hw_fw_request_ptp_adj_freq {
+typedef volatile struct  {
 	u32 ns_mac;
 	u32 fns_mac;
 	u32 ns_phy;
 	u32 fns_phy;
 	u32 mac_ns_adj;
 	u32 mac_fns_adj;
-};
+} __attribute__((__packed__)) hw_fw_request_ptp_adj_freq;
 
-struct __packed hw_fw_request_ptp_adj_clock {
+typedef volatile struct  {
 	u32 ns;
 	u32 sec;
 	int sign;
-};
+} __attribute__((__packed__)) hw_fw_request_ptp_adj_clock;
 
 #define HW_AQ_FW_REQUEST_PTP_GPIO_CTRL	         0x11
 #define HW_AQ_FW_REQUEST_PTP_ADJ_FREQ	         0x12
 #define HW_AQ_FW_REQUEST_PTP_ADJ_CLOCK	         0x13
 
-struct __packed hw_fw_request_iface {
+typedef volatile struct  {
 	u32 msg_id;
 	union {
 		/* PTP FW Request */
@@ -282,9 +282,9 @@ struct __packed hw_fw_request_iface {
 		struct hw_fw_request_ptp_adj_freq ptp_adj_freq;
 		struct hw_fw_request_ptp_adj_clock ptp_adj_clock;
 	};
-};
+} __attribute__((__packed__)) hw_fw_request_iface;
 
-struct __packed hw_atl_utils_settings {
+typedef volatile struct  {
 	u32 mtu;
 	u32 downshift_retry_count;
 	u32 link_pause_frame_quanta_100m;
@@ -324,7 +324,7 @@ struct __packed hw_atl_utils_settings {
 	u32 msm_options;
 	u32 dac_cable_serdes_modes;
 	u32 media_detect;
-};
+} __attribute__((__packed__)) hw_atl_utils_settings;
 
 enum macsec_msg_type {
 	macsec_cfg_msg = 0,
@@ -335,22 +335,22 @@ enum macsec_msg_type {
 	macsec_get_stats_msg,
 };
 
-struct __packed macsec_cfg_request {
+typedef volatile struct  {
 	u32 enabled;
 	u32 egress_threshold;
 	u32 ingress_threshold;
 	u32 interrupts_enabled;
-};
+} __attribute__((__packed__)) macsec_cfg_request;
 
-struct __packed macsec_msg_fw_request {
+typedef volatile struct  {
 	u32 msg_id; /* not used */
 	u32 msg_type;
 	struct macsec_cfg_request cfg;
-};
+} __attribute__((__packed__)) macsec_msg_fw_request;
 
-struct __packed macsec_msg_fw_response {
+typedef volatile struct  {
 	u32 result;
-};
+} __attribute__((__packed__)) macsec_msg_fw_response;
 
 enum hw_atl_rx_action_with_traffic {
 	HW_ATL_RX_DISCARD,
