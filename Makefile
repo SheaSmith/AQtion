@@ -29,7 +29,7 @@ export KO_EXISTS=`cat /etc/modules 2>/dev/null | grep atlantic && echo 1 || echo
 # 	BUILD_DIR:=$(KDIR)
 # endif
 
-PWD:=$(shell pwd)
+PWD:=/root/AQtion
 
 
 all:
