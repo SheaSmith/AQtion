@@ -33,13 +33,13 @@ PWD:=$(shell pwd)
 
 
 all:
-	$(MAKE) -j4 -C $(BUILD_DIR) M="$(PWD)" modules
+	$(MAKE) -j4 modules
 
 dox:	.doxygen
 	@doxygen $<
 
 clean:
-	$(MAKE) -j4 -C $(BUILD_DIR) M="$(PWD)" clean
+	$(MAKE) -j4 clean
 	@-rm -rdf doc/html 2 > /dev/null
 
 load:
